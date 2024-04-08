@@ -19,6 +19,8 @@ public class GameManager : MonoBehaviour
 
     private void Start()
     {
+
+        //set score on start
         score = 0;
     }
 

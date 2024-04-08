@@ -43,3 +43,6 @@ TagManager:
   - name: Default
     uniqueID: 0
     locked: 0
+  - name: Dropper
+    uniqueID: 64864541
+    locked: 0
