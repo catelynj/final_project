@@ -23,11 +23,8 @@ public class Dropper : MonoBehaviour
     [SerializeField]
     private float maxSpeed = 1f;
     [SerializeField]
-    private float moveForce;
-
-
-
-
+    //private float moveForce;
+    private Transform dropperTransform;
     private Camera mainCamera;
 
 
@@ -40,10 +37,14 @@ public class Dropper : MonoBehaviour
 
     void Update()
     {
+
+        //movement
         h = Input.GetAxis("Horizontal");
         if (speed <= maxSpeed)
         {
+            
             dropperRigidbody.transform.Translate(new Vector3(h, 0, 0) * speed * Time.deltaTime);
+            //clamp velocity to stop objects from going through boundary
             if (dropperRigidbody.velocity.magnitude > maxSpeed)
             {
                 dropperRigidbody.velocity = Vector3.ClampMagnitude(dropperRigidbody.velocity, maxSpeed);
@@ -59,10 +60,14 @@ public class Dropper : MonoBehaviour
     {
         randomDropper = Random.Range(0, droppers.Length - 1);
         
+        //get random number between 0-length of dropper array and instantiate random dropper at spawn point
         GameObject newDropper = Instantiate(droppers[randomDropper], dropperSpawnPoint.position, Quaternion.identity);
+
+        //get rigidbody and disable gravity until user drops gameobject
         dropperRigidbody = newDropper.GetComponent<Rigidbody>();
         dropperRigidbody.useGravity = false;
-      
+        dropperTransform = newDropper.GetComponent<Transform>();
+        //clamp Z position of dropper transform!!!!!
         isDropperSpawned = true;
         isFalling = false;
 
@@ -72,6 +77,7 @@ public class Dropper : MonoBehaviour
     {
         if (isDropperSpawned && !isFalling)
         {
+            //enable gravity on rb and invoke spawn method
             dropperRigidbody.useGravity = true;
             isFalling = true;
             Invoke("SpawnDropper", 1f);

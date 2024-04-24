@@ -14,6 +14,7 @@ GameObject:
   - component: {fileID: 5750222150825718934}
   - component: {fileID: 2395145785150903789}
   m_Layer: 6
+
   m_Name: OrangeDropper
   m_TagString: dropper
   m_Icon: {fileID: 0}
@@ -73,8 +74,8 @@ SpriteRenderer:
   m_AutoUVMaxDistance: 0.5
   m_AutoUVMaxAngle: 89
   m_LightmapParameters: {fileID: 0}
-  m_SortingLayerID: 0
-  m_SortingLayer: 0
+  m_SortingLayerID: 64864541
+  m_SortingLayer: 1
   m_SortingOrder: 0
   m_Sprite: {fileID: -2413806693520163455, guid: a86470a33a6bf42c4b3595704624658b, type: 3}
   m_Color: {r: 0.7921569, g: 0.5448348, b: 0.2862745, a: 1}
@@ -128,10 +129,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e567a770cbf35af49bcd089ed72b333f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+
   redDropper: {fileID: 2441411285096985384, guid: d6a1196689479064d89a94384f7ae91b, type: 3}
   orangeDropper: {fileID: 2441411285096985384}
   yellowDropper: {fileID: 2776240549997445955, guid: f93c6cee142909548ba4a1220f8d849a, type: 3}
   greenDropper: {fileID: 2776240549997445955, guid: 6ba24875ef916a7409c004287579e092, type: 3}
   blueDropper: {fileID: 2776240549997445955, guid: e9f1e2ff57c41eb4faaba74d532ebe92, type: 3}
   purpleDropper: {fileID: 2776240549997445955, guid: 88a50370632e1344ebdcca210525f35a, type: 3}
-  isActiveDropper: 1
+

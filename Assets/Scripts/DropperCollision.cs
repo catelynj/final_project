@@ -5,8 +5,8 @@ using UnityEngine;
 
 public class DropperCollision : MonoBehaviour
 {
-
     private Rigidbody dropperRB;
+
     public static DropperCollision instance;
    
     //dropper objects -- smallest (red) to biggest (purple)
@@ -18,26 +18,32 @@ public class DropperCollision : MonoBehaviour
     public GameObject purpleDropper;
     
     public bool isActiveDropper = true;
+
     private void Start()
     {
         dropperRB = GetComponent<Rigidbody>();
     }
     private void OnCollisionEnter(Collision collision)
     {
-
+        //check if active dropper
         if (!isActiveDropper)
             return; 
 
+        //if dropper collides with boundary...
         if (collision.gameObject.CompareTag("boundary"))
         {
-            Debug.Log(gameObject.name);
+            //Debug.Log(gameObject.name);
+
+            //adjusting velocity to limit random movement
             dropperRB.velocity = Vector3.zero;
             dropperRB.angularVelocity = Vector3.zero;
+            
+
             isActiveDropper = false;
 
         }
 
-        if (isActiveDropper)
+        if (isActiveDropper) //if active -- hasn't collided with boundary yet
         {
             //Orange -> Yellow
             if (collision.gameObject.name == gameObject.name && gameObject.name == "OrangeDropper(Clone)")
@@ -82,18 +88,19 @@ public class DropperCollision : MonoBehaviour
         }
 
     }
+    
 
     private void Merge(GameObject mergedDropperPrefab)
     {
         Debug.Log("Merge.");
 
-        Vector3 mergeOffset = new Vector3(0.5f, 0.5f, 0);
+        Vector3 mergeOffset = new Vector3(0.5f, 0.5f, 0); //offset to avoid collisions on merge
         Vector3 newPosition = transform.position + mergeOffset;
         GameObject mergedDropper = Instantiate(mergedDropperPrefab, newPosition, Quaternion.identity);
 
         mergedDropper.GetComponent<DropperCollision>().isActiveDropper = false;
 
-        Destroy(gameObject);
+        Destroy(gameObject); //destroy other dropper
 
     }
 
