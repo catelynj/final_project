@@ -58,7 +58,7 @@ public class Dropper : MonoBehaviour
   
     void SpawnDropper()
     {
-        randomDropper = Random.Range(0, droppers.Length - 1);
+        randomDropper = Random.Range(0, droppers.Length - 2);
         
         //get random number between 0-length of dropper array and instantiate random dropper at spawn point
         GameObject newDropper = Instantiate(droppers[randomDropper], dropperSpawnPoint.position, Quaternion.identity);

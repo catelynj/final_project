@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using Unity.VisualScripting;
 using UnityEngine;
+using UnityEngine.Events;
 
 public class DropperCollision : MonoBehaviour
 {
@@ -16,12 +17,20 @@ public class DropperCollision : MonoBehaviour
     public GameObject greenDropper;
     public GameObject blueDropper;
     public GameObject purpleDropper;
+
     
+
     public bool isActiveDropper = true;
+
+    private bool occupied = false;
+    private bool spawnCalled = false;
+
 
     private void Start()
     {
         dropperRB = GetComponent<Rigidbody>();
+        
+        
     }
     private void OnCollisionEnter(Collision collision)
     {
@@ -40,6 +49,7 @@ public class DropperCollision : MonoBehaviour
             
 
             isActiveDropper = false;
+            spawnCalled = true;
 
         }
 
@@ -48,7 +58,7 @@ public class DropperCollision : MonoBehaviour
             //Orange -> Yellow
             if (collision.gameObject.name == gameObject.name && gameObject.name == "OrangeDropper(Clone)")
             {
-                
+                GameManager.instance.pop.Play();
                 Merge(yellowDropper);
                 GameManager.instance.UpdateScore(50);
                 Destroy(collision.gameObject);
@@ -56,7 +66,7 @@ public class DropperCollision : MonoBehaviour
             //Red -> Orange
             else if (collision.gameObject.name == gameObject.name && gameObject.name == "RedDropper(Clone)")
             {
-                
+                GameManager.instance.pop.Play();
                 Merge(orangeDropper);
                 GameManager.instance.UpdateScore(25);
                 Destroy(collision.gameObject);
@@ -64,7 +74,7 @@ public class DropperCollision : MonoBehaviour
             //Yellow -> Green
             else if (collision.gameObject.name == gameObject.name && gameObject.name == "YellowDropper(Clone)")
             {
-                
+                GameManager.instance.pop.Play();
                 Merge(greenDropper);
                 GameManager.instance.UpdateScore(75);
                 Destroy(collision.gameObject);
@@ -72,7 +82,7 @@ public class DropperCollision : MonoBehaviour
             //Green -> Blue
             else if (collision.gameObject.name == gameObject.name && gameObject.name == "GreenDropper(Clone)")
             {
-               
+                GameManager.instance.pop.Play();
                 Merge(blueDropper);
                 GameManager.instance.UpdateScore(100);
                 Destroy(collision.gameObject);
@@ -80,7 +90,7 @@ public class DropperCollision : MonoBehaviour
             //Blue -> Purple (final size)
             else if (collision.gameObject.name == gameObject.name && gameObject.name == "BlueDropper(Clone)")
             {
-                
+                GameManager.instance.pop.Play();
                 Merge(purpleDropper);
                 GameManager.instance.UpdateScore(200);
                 Destroy(collision.gameObject);
@@ -108,5 +118,25 @@ public class DropperCollision : MonoBehaviour
     {
         //TODO:
         //when dropper stays in TopBoundary -- end game
+
+        occupied = false;
+
+        if (other.CompareTag("top_boundary") && !isActiveDropper)
+        {
+            occupied = true;
+            StartCoroutine("InitiateGameOver");
+        }
     }
+
+    private IEnumerator InitiateGameOver()
+    {
+        occupied = false;
+        spawnCalled = false;
+
+        yield return new WaitForSeconds(1f);
+
+        UIManager.instance.EnableGameOverCanvas();
+
+    }
+
 }

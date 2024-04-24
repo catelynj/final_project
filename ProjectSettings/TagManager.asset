@@ -6,6 +6,7 @@ TagManager:
   tags:
   - dropper
   - boundary
+  - top_boundary
   layers:
   - Default
   - TransparentFX
