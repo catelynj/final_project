@@ -57,7 +57,7 @@ public class Dropper : MonoBehaviour
   
     void SpawnDropper()
     {
-        randomDropper = Random.Range(0, droppers.Length);
+        randomDropper = Random.Range(0, droppers.Length - 1);
         
         GameObject newDropper = Instantiate(droppers[randomDropper], dropperSpawnPoint.position, Quaternion.identity);
         dropperRigidbody = newDropper.GetComponent<Rigidbody>();

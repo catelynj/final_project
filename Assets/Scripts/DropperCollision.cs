@@ -9,9 +9,14 @@ public class DropperCollision : MonoBehaviour
     private Rigidbody dropperRB;
     public static DropperCollision instance;
    
-    public GameObject dropper;
-    public GameObject bigDropper;
-    public GameObject smallDropper;
+    //dropper objects -- smallest (red) to biggest (purple)
+    public GameObject redDropper;
+    public GameObject orangeDropper; //default dropper   
+    public GameObject yellowDropper;
+    public GameObject greenDropper;
+    public GameObject blueDropper;
+    public GameObject purpleDropper;
+    
     public bool isActiveDropper = true;
     private void Start()
     {
@@ -34,18 +39,44 @@ public class DropperCollision : MonoBehaviour
 
         if (isActiveDropper)
         {
-            if (collision.gameObject.name == gameObject.name && gameObject.name == "Dropper(Clone)")
+            //Orange -> Yellow
+            if (collision.gameObject.name == gameObject.name && gameObject.name == "OrangeDropper(Clone)")
             {
-                Debug.Log("Dropper Collision");
-                Merge(bigDropper);
+                
+                Merge(yellowDropper);
                 GameManager.instance.UpdateScore(50);
                 Destroy(collision.gameObject);
             }
-            else if (collision.gameObject.name == gameObject.name && gameObject.name == "SmallDropper(Clone)")
+            //Red -> Orange
+            else if (collision.gameObject.name == gameObject.name && gameObject.name == "RedDropper(Clone)")
             {
-                Debug.Log("Small Dropper Collision");
-                Merge(dropper);
+                
+                Merge(orangeDropper);
                 GameManager.instance.UpdateScore(25);
+                Destroy(collision.gameObject);
+            }
+            //Yellow -> Green
+            else if (collision.gameObject.name == gameObject.name && gameObject.name == "YellowDropper(Clone)")
+            {
+                
+                Merge(greenDropper);
+                GameManager.instance.UpdateScore(75);
+                Destroy(collision.gameObject);
+            }
+            //Green -> Blue
+            else if (collision.gameObject.name == gameObject.name && gameObject.name == "GreenDropper(Clone)")
+            {
+               
+                Merge(blueDropper);
+                GameManager.instance.UpdateScore(100);
+                Destroy(collision.gameObject);
+            }
+            //Blue -> Purple (final size)
+            else if (collision.gameObject.name == gameObject.name && gameObject.name == "BlueDropper(Clone)")
+            {
+                
+                Merge(purpleDropper);
+                GameManager.instance.UpdateScore(200);
                 Destroy(collision.gameObject);
             }
         }
