@@ -1,39 +1,57 @@
 using System.Collections;
 using System.Collections.Generic;
-using UnityEditor.SearchService;
 using UnityEngine;
 using UnityEngine.Events;
 using UnityEngine.SceneManagement;
 
 public class GameManager : MonoBehaviour
 {
-    public static GameManager instance;
     public AudioSource pop;
-    public int target;
 
-    public int score = 0;
+    private static GameManager _instance;
+
+    public static GameManager Instance { get { return _instance; } }
+
     private void Awake()
     {
-        if (instance == null)
-            instance = this;
+        if (_instance != null && _instance != this)
+        {
+            Destroy(this.gameObject);
+        }
         else
-            Destroy(gameObject);
+        {
+            _instance = this;
+        }
 
-        DontDestroyOnLoad(gameObject);
-
-        
+        Debug.Log("GAME MANAGER AWAKE");
     }
 
     private void Start()
     { 
-        score = 0;
-        target = 2000;
-    }
 
+        //mute toggle player pref
+        if (PlayerPrefs.HasKey("muted"))
+        {
+            int muteValue = PlayerPrefs.GetInt("muted");
+
+            if (muteValue == 1 && UIManager.Instance != null)
+            {
+                UIManager.Instance.ToggleMute();
+            }
+        }
+
+    }
+    public void Play()
+    {
+        //On Play Button Click -- Load Main Scene 
+        SceneManager.LoadScene(1);
+        Debug.Log("Play Button");
+    }
     public void Restart()
     {
         //on restart button click
         SceneManager.LoadScene(1);
+        Debug.Log("Restart Button");
     }
     public void Quit()
     {
@@ -41,17 +59,12 @@ public class GameManager : MonoBehaviour
         Application.Quit();
     }
 
-    public void UpdateScore(int addscore)
+    public void WinGame()
     {
-        score += addscore;
-        if(score >= target)
+        if (UIManager.Instance != null)
         {
-            WinGame();
+            UIManager.Instance.EnableGameWinCanvas();
         }
-    }
-
-    private void WinGame()
-    {
-        UIManager.instance.EnableGameWinCanvas(); 
+         
     }
 }

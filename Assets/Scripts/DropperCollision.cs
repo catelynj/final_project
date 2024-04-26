@@ -58,41 +58,41 @@ public class DropperCollision : MonoBehaviour
             //Orange -> Yellow
             if (collision.gameObject.name == gameObject.name && gameObject.name == "OrangeDropper(Clone)")
             {
-                GameManager.instance.pop.Play();
+                GameManager.Instance.pop.Play();
                 Merge(yellowDropper);
-                GameManager.instance.UpdateScore(50);
+                UIManager.Instance.UpdateScore(50);
                 Destroy(collision.gameObject);
             }
             //Red -> Orange
             else if (collision.gameObject.name == gameObject.name && gameObject.name == "RedDropper(Clone)")
             {
-                GameManager.instance.pop.Play();
+                GameManager.Instance.pop.Play();
                 Merge(orangeDropper);
-                GameManager.instance.UpdateScore(25);
+                UIManager.Instance.UpdateScore(25);
                 Destroy(collision.gameObject);
             }
             //Yellow -> Green
             else if (collision.gameObject.name == gameObject.name && gameObject.name == "YellowDropper(Clone)")
             {
-                GameManager.instance.pop.Play();
+                GameManager.Instance.pop.Play();
                 Merge(greenDropper);
-                GameManager.instance.UpdateScore(75);
+                UIManager.Instance.UpdateScore(75);
                 Destroy(collision.gameObject);
             }
             //Green -> Blue
             else if (collision.gameObject.name == gameObject.name && gameObject.name == "GreenDropper(Clone)")
             {
-                GameManager.instance.pop.Play();
+                GameManager.Instance.pop.Play();
                 Merge(blueDropper);
-                GameManager.instance.UpdateScore(100);
+                UIManager.Instance.UpdateScore(100);
                 Destroy(collision.gameObject);
             }
             //Blue -> Purple (final size)
             else if (collision.gameObject.name == gameObject.name && gameObject.name == "BlueDropper(Clone)")
             {
-                GameManager.instance.pop.Play();
+                GameManager.Instance.pop.Play();
                 Merge(purpleDropper);
-                GameManager.instance.UpdateScore(200);
+                UIManager.Instance.UpdateScore(200);
                 Destroy(collision.gameObject);
             }
         }
@@ -135,7 +135,8 @@ public class DropperCollision : MonoBehaviour
 
         yield return new WaitForSeconds(1f);
 
-        UIManager.instance.EnableGameOverCanvas();
+        UIManager.Instance.EnableGameOverCanvas();
+        Debug.Log("GAME OVER GO");
 
     }
 
