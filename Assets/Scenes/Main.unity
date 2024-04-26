@@ -577,7 +577,7 @@ MonoBehaviour:
   - {fileID: 2776240549997445955, guid: 88a50370632e1344ebdcca210525f35a, type: 3}
   dropperSpawnPoint: {fileID: 2011702535}
   h: 0
-  speed: 3
+  speed: 4
   maxSpeed: 5
   dropperTransform: {fileID: 0}
 --- !u!4 &311492659

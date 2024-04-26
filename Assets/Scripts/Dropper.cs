@@ -4,6 +4,7 @@ using System.Runtime.CompilerServices;
 using UnityEditor;
 using UnityEngine;
 
+//Catelyn J. | April 2024 | Script for Spawning Dropper Objects -- handles instantiation of droppers, randomized spawning, and movement
 public class Dropper : MonoBehaviour
 {
     public static Dropper instance;
@@ -30,7 +31,7 @@ public class Dropper : MonoBehaviour
 
     void Start()
     {
-        
+
         mainCamera = Camera.main;
         SpawnDropper();
     }
@@ -42,7 +43,7 @@ public class Dropper : MonoBehaviour
         h = Input.GetAxis("Horizontal");
         if (speed <= maxSpeed)
         {
-            
+
             dropperRigidbody.transform.Translate(new Vector3(h, 0, 0) * speed * Time.deltaTime);
             //clamp velocity to stop objects from going through boundary
             if (dropperRigidbody.velocity.magnitude > maxSpeed)
@@ -51,15 +52,15 @@ public class Dropper : MonoBehaviour
             }
         }
         if (Input.GetKeyDown(KeyCode.Space))
-        {   
+        {
             DropDropper(); //drop
         }
     }
-  
+
     void SpawnDropper()
     {
         randomDropper = Random.Range(0, droppers.Length - 2);
-        
+
         //get random number between 0-length of dropper array and instantiate random dropper at spawn point
         GameObject newDropper = Instantiate(droppers[randomDropper], dropperSpawnPoint.position, Quaternion.identity);
 

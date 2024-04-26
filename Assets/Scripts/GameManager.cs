@@ -1,9 +1,9 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-using UnityEngine.Events;
 using UnityEngine.SceneManagement;
 
+//Catelyn J. | April 2024 | GameManager Script -- handles win/lose conditions,play/restart/quit functions
 public class GameManager : MonoBehaviour
 {
     public AudioSource pop;
@@ -27,7 +27,7 @@ public class GameManager : MonoBehaviour
     }
 
     private void Start()
-    { 
+    {
 
         //mute toggle player pref
         if (PlayerPrefs.HasKey("muted"))
@@ -65,6 +65,6 @@ public class GameManager : MonoBehaviour
         {
             UIManager.Instance.EnableGameWinCanvas();
         }
-         
+
     }
 }

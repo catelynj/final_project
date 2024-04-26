@@ -1,14 +1,10 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-using UnityEngine.Events;
-using UnityEngine.TextCore.Text;
 using UnityEngine.UI;
 using UnityEngine.SceneManagement;
-using static UnityEngine.GraphicsBuffer;
-using UnityEngine.SocialPlatforms.Impl;
-using Unity.VisualScripting;
 
+//Catelyn J. | April 2024 | UIManager Script -- handles updates to UI, canvases, and sound toggling
 public class UIManager : MonoBehaviour
 {
     public Text scoreText;
@@ -51,7 +47,7 @@ public class UIManager : MonoBehaviour
 
         if (GameManager.Instance != null && SceneManager.GetActiveScene().name == "Main")
         {
-            
+
             gameOverCanvas.enabled = false;
             gameWinCanvas.enabled = false;
             score = 0;
@@ -103,8 +99,8 @@ public class UIManager : MonoBehaviour
         AudioListener.volume = isMuted ? 0 : 1;
 
         PlayerPrefs.SetInt("muted", isMuted ? 1 : 0);
-        
-        
+
+
     }
 
     private void UpdateToggleState()
