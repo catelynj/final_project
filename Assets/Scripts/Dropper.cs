@@ -39,21 +39,26 @@ public class Dropper : MonoBehaviour
     void Update()
     {
 
-        //movement
-        h = Input.GetAxis("Horizontal");
-        if (speed <= maxSpeed)
+        if(dropperRigidbody != null)
         {
-
-            dropperRigidbody.transform.Translate(new Vector3(h, 0, 0) * speed * Time.deltaTime);
-            //clamp velocity to stop objects from going through boundary
-            if (dropperRigidbody.velocity.magnitude > maxSpeed)
+            //movement
+            h = Input.GetAxis("Horizontal");
+            if (speed <= maxSpeed)
             {
-                dropperRigidbody.velocity = Vector3.ClampMagnitude(dropperRigidbody.velocity, maxSpeed);
+
+                dropperRigidbody.transform.Translate(new Vector3(h, 0, 0) * speed * Time.deltaTime);
+
+
+                //clamp velocity to stop objects from going through boundary
+                if (dropperRigidbody.velocity.magnitude > maxSpeed)
+                {
+                    dropperRigidbody.velocity = Vector3.ClampMagnitude(dropperRigidbody.velocity, maxSpeed);
+                }
             }
-        }
-        if (Input.GetKeyDown(KeyCode.Space))
-        {
-            DropDropper(); //drop
+            if (Input.GetKeyDown(KeyCode.Space))
+            {
+                DropDropper(); //drop
+            }
         }
     }
 

@@ -30,14 +30,9 @@ public class DropperCollision : MonoBehaviour
     }
     private void OnCollisionEnter(Collision collision)
     {
-        if (!isActiveDropper) { return; }
-           
         //if dropper collides with boundary...
         if (collision.gameObject.CompareTag("boundary"))
         {
-            //adjusting velocity to limit random movement
-            dropperRB.velocity = Vector3.zero;
-            dropperRB.angularVelocity = Vector3.zero;
             spawnCalled = true;
             isActiveDropper = false;
             return;
@@ -101,24 +96,23 @@ public class DropperCollision : MonoBehaviour
                 //Debug.Log("returned");
                 return;
             }
-
-
-        }
+        } 
+       
     }
 
     private void Merge(GameObject mergedDropperPrefab)
     {
         Debug.Log("Merge.");
 
-        Vector3 mergeOffset = new Vector3(0.5f, 0.5f, 0); //offset to avoid collisions on merge
+        Vector3 mergeOffset = new Vector2(0.5f, 0.5f); // Offset to avoid collisions on merge
         Vector3 newPosition = transform.position + mergeOffset;
+
         GameObject mergedDropper = Instantiate(mergedDropperPrefab, newPosition, Quaternion.identity);
 
+        //set merged dropper as inactive
         mergedDropper.GetComponent<DropperCollision>().isActiveDropper = false;
-        Destroy(gameObject); //destroy other dropper
-
+        Destroy(gameObject); // Destroy other dropper
     }
-
     private void OnTriggerStay(Collider other)
     {
         //TODO:
